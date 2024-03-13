@@ -1,10 +1,10 @@
 const TelegramBot = require('node-telegram-bot-api');
 const fs = require('fs');
 
-const botToken = '6597236289:AAGLZi909WC-ayDGsnk5kZR43hiaGEyEsEc'; // Replace with your bot token
+const botToken = 'YOUR_BOT_TOKEN'; // Replace with your bot token
 const bot = new TelegramBot(botToken, { polling: true });
 
-const ownerUserId = 5442086114; // Replace with your user ID
+const ownerUserId = YOUR_OWNER_USER_ID; // Replace with your user ID
 const authorizedUsers = {}; // Object to store authorized user IDs and their data
 
 // Load authorized users data from file if it exists
@@ -122,31 +122,12 @@ bot.onText(/\/forward/, async (msg) => {
     return;
   }
 
-  bot.sendMessage(chatId, 'Please choose the message source:', {
-    reply_markup: {
-      inline_keyboard: [
-        [{ text: 'Group', callback_data: 'group' }],
-        [{ text: 'Private Chat', callback_data: 'private' }],
-      ]
-    }
-  });
-});
-
-bot.on('callback_query', async (callbackQuery) => {
-  const chatId = callbackQuery.message.chat.id;
-  const sourceType = callbackQuery.data;
-
-  if (sourceType !== 'group' && sourceType !== 'private') {
-    bot.sendMessage(chatId, 'Invalid source type selected.');
-    return;
-  }
-
-  bot.sendMessage(chatId, `Please provide the ${sourceType === 'group' ? 'group' : 'private chat'} ID (integer):`);
+  await bot.sendMessage(chatId, 'Please provide the source chat ID (integer):');
   bot.once('message', (sourceMessage) => {
     const sourceChatId = parseIntegerMessage(sourceMessage);
 
     if (isNaN(sourceChatId)) {
-      bot.sendMessage(chatId, 'Invalid input. Please resend the chat ID as an integer.');
+      bot.sendMessage(chatId, 'Invalid input. Please resend the source chat ID as an integer.');
       return;
     }
 
@@ -191,6 +172,7 @@ bot.on('callback_query', async (callbackQuery) => {
   });
 });
 
+
 bot.onText(/\/cancel/, async (msg) => {
   const chatId = msg.chat.id;
   if (isForwarding) {
@@ -218,6 +200,7 @@ process.on('SIGINT', () => {
 });
 
 console.log('Bot is running...');
+
 
 function parseIntegerMessage(message) {
   const parsedValue = parseInt(message.text.trim());
