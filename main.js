@@ -1,10 +1,10 @@
 const TelegramBot = require('node-telegram-bot-api');
 const fs = require('fs');
 
-const botToken = 'YOUR_BOT_TOKEN'; // Replace with your bot token
+const botToken = '6597236289:AAGLZi909WC-ayDGsnk5kZR43hiaGEyEsEc'; // Replace with your bot token
 const bot = new TelegramBot(botToken, { polling: true });
 
-const ownerUserId = YOUR_OWNER_USER_ID; // Replace with your user ID
+const ownerUserId = 5442086114; // Replace with your user ID
 const authorizedUsers = {}; // Object to store authorized user IDs and their data
 
 // Load authorized users data from file if it exists
