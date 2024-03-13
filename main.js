@@ -1,3 +1,7 @@
+// Telegram Bot to forward messages from one chat to another using Node.js and node-telegram-bot-api
+// Made by @dev_gagan
+
+
 const TelegramBot = require('node-telegram-bot-api');
 const fs = require('fs');
 
@@ -6,6 +10,8 @@ const bot = new TelegramBot(botToken, { polling: true });
 
 const ownerUserId = 5442086114; // Replace with your user ID
 const authorizedUsers = {}; // Object to store authorized user IDs and their data
+
+const startMessage = "Welcome to 𝐒𝐏𝐘 𝐅𝐎𝐑𝐖𝐀𝐑𝐃 𝐁𝐎𝐓 made with ❤️ by 𝙂𝙖𝙜𝙖𝙣!!! \n\n✨Embrace the Power of Forwarding✨ \n\nAre you tired of manual message forwarding? 𝐒𝐏𝐘 𝐅𝐎𝐑𝐖𝐀𝐑𝐃 𝐁𝐎𝐓 is here to make your life easier. \n\nSeamlessly forward messages from one chat to another with just a few clicks.\n\n🚀 Fast: Instantly transmit messages to your desired destination.\n\🔒 Secure: Maintain your data integrity and privacy throughout the process.\n🤖 Techy: Harness the potential of automation and advanced messaging solutions.\n\nFor any inquiries or assistance, feel free to contact us to get authorozed to use this bot.\n\nLet's make message forwarding smarter, faster, and more efficient with 𝐒𝐏𝐘 𝐅𝐎𝐑𝐖𝐀𝐑𝐃 𝐁𝐎𝐓! 🌟🤖"
 
 // Load authorized users data from file if it exists
 const authorizedUsersFile = 'authorized_users.json';
@@ -35,15 +41,11 @@ async function forwardMessagesInRange(chatId, sourceChatId, destinationChatId, s
 
     try {
       for (let batchMessageId = messageId; batchMessageId <= endBatchId; batchMessageId++) {
-        const message = await bot.forwardMessage(destinationChatId, sourceChatId, batchMessageId, { disable_notification: true });
-        const original_text = message.text || message.caption || ''; // Extract the text or caption from the message
-        const cleaned_text = original_text.split("\n", 1)[-1]; // Remove the "forwarded from" tag
-        if (cleaned_text) {
-          await bot.sendMessage(chatId, cleaned_text, { parse_mode: 'HTML' }); // Forward the cleaned message to the destination chat
-        }
-        if (batchMessageId !== endBatchId) {
-          await delay(messageDelay); // Introduce a delay between messages in the same batch
-        }
+		await bot.forwardMessage(destinationChatId, sourceChatId, batchMessageId, { disable_notification: true });
+		console.log(`Forwarded message ${batchMessageId}`);
+		if (batchMessageId !== endBatchId) {
+			await delay(messageDelay); // Introduce a delay between messages in the same batch
+		}
       }
       console.log(`Forwarded messages from ${messageId} to ${endBatchId}`);
       
@@ -59,7 +61,7 @@ async function forwardMessagesInRange(chatId, sourceChatId, destinationChatId, s
     }
   }
 
-  isForwarding = false; // Reset the forwarding flag
+  isForwarding = false; // Fork kr lo tumhari smjh se bahar hai @devgagan
 }
 
 bot.onText(/\/auth (\d+)/, (msg, match) => {
