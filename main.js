@@ -25,7 +25,7 @@ let isForwarding = false;
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-async function forwardMessagesInRange(chatId, sourceChatId, destinationChatId, startId, endId) {
+async function telegram.message.copyInRange(chatId, sourceChatId, destinationChatId, startId, endId) {
   isForwarding = true; // Set forwarding flag to true
 
   const batchSize = 20; // Number of messages to forward in each batch
@@ -42,7 +42,7 @@ async function forwardMessagesInRange(chatId, sourceChatId, destinationChatId, s
 
     try {
       for (let batchMessageId = messageId; batchMessageId <= endBatchId; batchMessageId++) {
-		await bot.forwardMessage(destinationChatId, sourceChatId, batchMessageId, { disable_notification: true });
+		await bot.telegram.message.copy(destinationChatId, sourceChatId, batchMessageId, { disable_notification: true });
 		console.log(`Forwarded message ${batchMessageId}`);
 		if (batchMessageId !== endBatchId) {
 			await delay(messageDelay); // Introduce a delay between messages in the same batch
@@ -161,7 +161,7 @@ bot.onText(/\/forward/, async (msg) => {
             return;
           }
 
-          forwardMessagesInRange(chatId, sourceChatId, destinationChatId, startMessageId, endMessageId)
+          telegram.message.copyInRange(chatId, sourceChatId, destinationChatId, startMessageId, endMessageId)
             .then(() => {
               bot.sendMessage(chatId, 'Forwarded messages to the destination chat');
             })
