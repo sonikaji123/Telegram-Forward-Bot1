@@ -4,10 +4,10 @@
 const TelegramBot = require('node-telegram-bot-api');
 const fs = require('fs');
 
-const botToken = '7133152399:AAEp9f0zrdAOhLeetEAdVnfigJiG0Wb7raA'; // Replace with your bot token
+const botToken = 'YOUR_BOT_TOKEN'; // Replace with your bot token
 const bot = new TelegramBot(botToken, { polling: true });
 
-const ownerUserId = 5409975736; // Replace with your user ID
+const ownerUserId = YOUR_OWNER_USER_ID; // Replace with your user ID
 const authorizedUsers = {}; // Object to store authorized user IDs and their data
 
 const startMessage = "Welcome to Deadpool 𝐅𝐎𝐑𝐖𝐀𝐑𝐃 𝐁𝐎𝐓 made with ❤️ by 𝙂𝙖𝙜𝙖𝙣!!! \n\n✨Embrace the Power of Forwarding✨ \n\nAre you tired of manual message forwarding? 𝐒𝐏𝐘 𝐅𝐎𝐑𝐖𝐀𝐑𝐃 𝐁𝐎𝐓 is here to make your life easier. \n\nSeamlessly forward messages from one chat to another with just a few clicks.\n\n🚀 Fast: Instantly transmit messages to your desired destination.\n\🔒 Secure: Maintain your data integrity and privacy throughout the process.\n🤖 Techy: Harness the potential of automation and advanced messaging solutions.\n\nFor any inquiries or assistance, feel free to contact us to get authorozed to use this bot.\n\nLet's make message forwarding smarter, faster, and more efficient with 𝐒𝐏𝐘 𝐅𝐎𝐑𝐖𝐀𝐑𝐃 𝐁𝐎𝐓! 🌟🤖";
@@ -183,7 +183,6 @@ bot.onText(/\/forward/, async (msg) => {
     });
   });
 });
-
 
 bot.onText(/\/cancel/, async (msg) => {
   const chatId = msg.chat.id;
