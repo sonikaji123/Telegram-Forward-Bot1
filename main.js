@@ -41,7 +41,7 @@ async function forwardMessagesInRange(chatId, sourceChatId, destinationChatId, s
     try {
       for (let batchMessageId = messageId; batchMessageId <= endBatchId; batchMessageId++) {
         // Retrieve the message to forward
-        const message = await bot.getMessage(sourceChatId, batchMessageId);
+        const message = await bot.telegram.getMessage(sourceChatId, batchMessageId);
         
         // Remove forward_from field from message options
         const options = { disable_notification: true };
