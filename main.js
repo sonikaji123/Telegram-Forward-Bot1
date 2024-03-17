@@ -1,6 +1,3 @@
-// Telegram Bot to forward messages from one chat to another using Node.js and node-telegram-bot-api
-// Made by @dev_gagan
-
 const TelegramBot = require('node-telegram-bot-api');
 const fs = require('fs');
 
@@ -214,8 +211,5 @@ console.log('Bot is running...');
 
 function parseIntegerMessage(message) {
   const parsedValue = parseInt(message.text.trim());
-  return isNaN(parsedValue) ? NaN : parsedValue;
-}
-
   return isNaN(parsedValue) ? NaN : parsedValue;
 }
