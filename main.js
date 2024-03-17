@@ -216,3 +216,6 @@ function parseIntegerMessage(message) {
   const parsedValue = parseInt(message.text.trim());
   return isNaN(parsedValue) ? NaN : parsedValue;
 }
+
+  return isNaN(parsedValue) ? NaN : parsedValue;
+}
